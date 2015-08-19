@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+     >
+    <include
+        layout="@layout/actionbar"
+        android:id="@+id/actiom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        />
+
+
+
+    <com.astuetz.PagerSlidingTabStrip
+
+        android:id="@+id/tabs_main"
+        android:layout_below="@+id/actiom"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        />
+    <ImageView
+        android:id="@+id/viewGif"
+        android:layout_below="@+id/tabs_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:background="@mipmap/mosque"
+
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerForList"
+        android:layout_below="@+id/tabs_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+</RelativeLayout>

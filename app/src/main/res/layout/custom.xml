@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="63dp"
+
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="3"
+
+        android:id="@+id/sims"
+        >
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight=".5"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:src="@mipmap/alarm"
+        android:id="@+id/alarm"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="match_parent"
+        android:id="@+id/txtPrayerTimes_alram"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/home_detail"
+        android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingRight="10dp"
+        android:id="@+id/time"
+        android:textColor="@android:color/white"
+        android:layout_toLeftOf="@+id/txtPrayerTimes_alram"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/sims"
+        android:layout_height="3dp"
+        android:id="@+id/views"
+        android:text="dadada"
+        android:background="@mipmap/line_history"/>
+
+
+
+</RelativeLayout>
