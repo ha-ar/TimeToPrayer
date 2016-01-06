@@ -18,16 +18,20 @@ package com.algorepublic.cityhistory.prayertimings.util;
 
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
+import com.algorepublic.cityhistory.prayertimings.QiblaFragment;
 import com.algorepublic.cityhistory.prayertimings.R;
 
 public enum LocationEnum {
+
     MENU_ARAK(1, 34.08, 49.7), MENU_ARDABIL(2, 38.25, 48.28), MENU_ORUMIYEH(3,
             37.53, 45d), MENU_ESFEHAN(4, 32.65, 51.67), MENU_AHVAZ(5, 31.52,
             48.68), MENU_ILAM(6, 33.63, 46.42), MENU_BOJNURD(7, 37.47, 57.33), MENU_BANDAR_ABAS(
             8, 27.18, 56.27), MENU_BUSHEHR(9, 28.96, 50.84), MENU_BIRJAND(10,
-            60.00, 111.89), MENU_TABRIZ(11, 38.08d, 46.3), MENU_TEHRAN(12,
-            35.68, 51.42), MENU_KHORAM_ABAD(13, 33.48, 48.35), MENU_RASHT(14,
+            31.54, 74.34), MENU_TABRIZ(11, 38.08d, 46.3),
+    MENU_TEHRAN(12,
+            QiblaFragment.gps.getLatitude() , QiblaFragment.gps.getLongitude()), MENU_KHORAM_ABAD(13, 33.48, 48.35), MENU_RASHT(14,
             37.3, 49.63), MENU_ZAHEDAN(15, 29.5, 60.85), MENU_ZANJAN(16, 36.67,
             48.48), MENU_SARI(17, 36.55, 53.1), MENU_SEMNAN(18, 35.57, 53.38), MENU_SANANDAJ(
             19, 35.3, 47.02), MENU_SHAHREKORD(20, 32.32, 50.85), MENU_SHIRAZ(
@@ -37,13 +41,20 @@ public enum LocationEnum {
             54.48), MENU_MASHHAD(28, 34.3, 59.57), MENU_HAMEDAN(29, 34.77,
             48.58), MENU_YASUJ(30, 30.82, 51.68), MENU_YAZD(31, 31.90, 54.37);
 
+
+
     private int id;
     private Location location;
 
+
     LocationEnum(int id, double latitude, double longitude) {
+        Log.e("ID",QiblaFragment.gps.getLocation().toString() + QiblaFragment.gps.getLatitude());
         Location l = new Location("GPS");
-        l.setLatitude(latitude);
+         l.setLatitude(latitude);
         l.setLongitude(longitude);
+
+
+//        Log.e("potions",String.valueOf(gps.getLatitude())+String.valueOf(gps.getLongitude()));
         this.location = l;
         this.id = id;
 

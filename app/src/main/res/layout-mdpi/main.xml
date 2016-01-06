@@ -31,7 +31,7 @@
 			android:gravity="center_horizontal"
 			android:layout_height="wrap_content" android:id="@+id/textLayout">
 			<TextView
-				android:textSize="@dimen/location" android:id="@+id/location_text_line2"
+				android:textSize="0dp" android:id="@+id/location_text_line2"
 				android:textColor="@color/gray" android:layout_width="fill_parent" android:layout_height="fill_parent"
 				android:gravity="center_horizontal" android:paddingTop="50px"
 				android:lines="2"/>
@@ -60,7 +60,7 @@
 				<ImageView
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:id="@+id/frameImage" android:layout_gravity="center"
-					android:src="@drawable/corp" />
+					android:src="@drawable/frame" />
 				<ImageView 
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:layout_gravity="center" android:id="@+id/compassImage"

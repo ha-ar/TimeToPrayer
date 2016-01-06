@@ -13,15 +13,6 @@ public class AlarmManagerHelper extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-//        Bundle extras = intent.getExtras();
-//        if(extras !=null)
-//        {
-//            String value = extras.getString("");
-//            if( value != null && value.equals( "" ) )
-//            {
-//                //Value was found, do something
-//            }
-//        }
         Toast.makeText(context, "Namaz Alert", Toast.LENGTH_SHORT).show();
         Intent service1 = new Intent(context, AlarmService.class);
         context.startService(service1);

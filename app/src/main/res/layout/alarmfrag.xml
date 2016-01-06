@@ -8,10 +8,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:orientation="horizontal"
         android:gravity="center"
-
+        android:layout_marginTop="10dp"
         android:weightSum="3"
         android:id="@+id/sims"
         >
@@ -27,11 +27,15 @@
             android:layout_toRightOf="@+id/home_detail"
             android:layout_alignParentLeft="true"
             android:textColor="@android:color/white"  />
-        <Switch
+        <ToggleButton
             android:layout_width="0dp"
             android:layout_weight=".5"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
+            android:textOn="@string/On"
+            android:textOff="@string/Off"
+            android:textColor="#ffffff"
             android:layout_marginLeft="5dp"
+            android:background="@drawable/style_toggle_button"
             android:id="@+id/home_detail"
             android:layout_centerVertical="true"
             />

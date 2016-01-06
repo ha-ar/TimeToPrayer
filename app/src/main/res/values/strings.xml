@@ -29,6 +29,8 @@
 	<string name="latitude_south">S</string>
 	<string name="longitude_east">E</string>
 	<string name="longitude_west">W</string>
+	<string name="On">On<font fgcolour="#956307"></font> </string>
+	<string name="Off">Off<font fgcolour="#ffffff"></font> </string>
 
 	<string name="gps_status">Use GPS</string>
 	<string name="gps_status_summary">Enables using GPS for getting your location.</string>

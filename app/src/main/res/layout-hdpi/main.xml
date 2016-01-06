@@ -18,34 +18,35 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:id="@+id/mainLayout"
 	>
-
+	<!--<com.farsitel.adad.AdView android:id="@+id/ad"-->
+		<!--android:layout_width="fill_parent"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:layout_gravity="bottom" />-->
 	<RelativeLayout
-		xmlns:android="http://schemas.android.com/apk/res/android" android:layout_marginTop="10px"
+		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="vertical" android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<LinearLayout
 			xmlns:android="http://schemas.android.com/apk/res/android"
-			android:orientation="vertical"
-			 android:layout_width="wrap_content"
+			android:orientation="vertical" android:layout_width="wrap_content"
 			android:layout_centerHorizontal="true"
 			android:gravity="center_horizontal"
 			android:layout_height="wrap_content" android:id="@+id/textLayout">
 			<TextView
 				android:textSize="@dimen/location" android:id="@+id/location_text_line2"
 				android:textColor="@color/gray" android:layout_width="fill_parent" android:layout_height="fill_parent"
-				android:gravity="center_horizontal" android:paddingTop="100px"
+				android:gravity="center_horizontal" android:paddingTop="45px"
 				android:lines="2"/>
 		</LinearLayout>
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_centerInParent="true" android:id="@+id/noLocationLayout"
-
 			>
 			<TextView
 				android:textSize="@dimen/orientation" android:textColor="@color/gray"
-				android:gravity="center" android:id="@+id/noLocationText" android:paddingTop="60px"
-				android:paddingLeft="40px" android:paddingRight="40px"
-				android:layout_height="fill_parent" android:layout_width="fill_parent" 
+				android:gravity="center" android:id="@+id/noLocationText" android:paddingTop="30px"
+				android:paddingLeft="25px" android:paddingRight="25px"
+				android:layout_height="fill_parent" android:layout_width="fill_parent"
 				android:lines="5" />
 		</LinearLayout>
 		<FrameLayout
@@ -60,8 +61,8 @@
 				<ImageView
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:id="@+id/frameImage" android:layout_gravity="center"
-					android:src="@drawable/corp"/>
-				<ImageView 
+					android:src="@drawable/frame" />
+				<ImageView
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:layout_gravity="center" android:id="@+id/compassImage"
 					android:src="@drawable/rosetta" />
@@ -69,8 +70,7 @@
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:layout_gravity="center" android:id="@+id/arrowImage"
 					android:src="@drawable/arrow" />
-
 			</FrameLayout>
-		</FrameLayout>	
+		</FrameLayout>
 	</RelativeLayout>
 </LinearLayout>

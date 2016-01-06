@@ -43,6 +43,7 @@ import com.algorepublic.cityhistory.prayertimings.util.ConstantUtilInterface;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class QiblaCompassManager implements SensorEventListener,
         LocationListener, ConstantUtilInterface {
 
@@ -237,10 +238,14 @@ public class QiblaCompassManager implements SensorEventListener,
             // } else if (pitch < 30) { // upside
             // qiblaActivity.onScreenUp();
             // }
-            if ((pitch < -45 || pitch > 45) || (roll > -45 || roll < -135)) {
-                qiblaActivity.onScreenDown();
-            } else {
-                qiblaActivity.onScreenUp();
+            try {
+                if ((pitch < -45 || pitch > 45) || (roll > -45 || roll < -135)) {
+                    qiblaActivity.onScreenDown();
+                } else {
+                    qiblaActivity.onScreenUp();
+                }
+            }catch (Exception io){
+
             }
             double newDegree = yaw - 90d;
             if (previousNorth == null

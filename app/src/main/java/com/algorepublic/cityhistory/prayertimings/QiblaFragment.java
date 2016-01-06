@@ -2,6 +2,7 @@ package com.algorepublic.cityhistory.prayertimings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Criteria;
@@ -37,7 +38,7 @@ import java.util.TimerTask;
  * Created by waqas on 8/13/15.
  */
 public class QiblaFragment extends Fragment implements Animation.AnimationListener,
-        SharedPreferences.OnSharedPreferenceChangeListener,ConstantUtilInterface {
+        OnSharedPreferenceChangeListener,ConstantUtilInterface {
 
     private boolean faceUp = true;
     private boolean gpsLocationFound = true;
@@ -56,6 +57,7 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
     private SharedPreferences perfs;
     public boolean isRegistered = false;
     public boolean isGPSRegistered = false;
+    public static GPSTracker gps;
     View view;
     private final Handler mHandler = new Handler() {
         @Override
@@ -159,13 +161,12 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       view = inflater.inflate(R.layout.main, container, false);
-
+        view = inflater.inflate(R.layout.main, container, false);
+        gps=new GPSTracker(getActivity());
         // registering for listeners
         registerListeners();
         // Checking if the GPS is on or off. If it was on the default location
         // will be set and if its on, appropriate
-
         perfs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         perfs.registerOnSharedPreferenceChangeListener(this);
         String gpsPerfKey = getString(R.string.gps_pref_key);
@@ -205,6 +206,7 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     private void onGPSOn() {
         gpsLocationFound = false;
         onInvalidateQible(getString(R.string.no_location_yet));
@@ -212,12 +214,12 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
     private void onInvalidateQible(String message) {
         // TextView textView = (TextView)
         // findViewById(R.id.location_text_line1);
-//        TextView textView = (TextView) getView().findViewById(R.id.location_text_line2);
+        TextView textView = (TextView) getView().findViewById(R.id.location_text_line2);
         // TextView textView3 = (TextView)
         // findViewById(R.id.location_text_line3);
 
-//        textView.setText("");
-//        textView.setVisibility(View.INVISIBLE);
+        textView.setText("");
+        textView.setVisibility(View.INVISIBLE);
         ((ImageView) getView().findViewById(R.id.arrowImage))
                 .setVisibility(View.INVISIBLE);
         ((ImageView) getView().findViewById(R.id.compassImage))
@@ -234,7 +236,11 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
                 .setVisibility(View.INVISIBLE);
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerListeners();
+    }
     private void registerListeners() {
         SharedPreferences perfs = PreferenceManager
                 .getDefaultSharedPreferences(getActivity().getApplicationContext());
@@ -312,11 +318,26 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
     public void onNewLocationFromGPS(Location location) {
         gpsLocationFound = true;
         currentLocation = location;
-       this.setLocationText(getLocationForPrint(location.getLatitude(),
-                location.getLongitude()));
+//        this.setLocationText(getLocationForPrint(location.getLatitude(),
+//                location.getLongitude()));
         requestForValidationOfQibla();
     }
+    private void unregisterListeners() {
+        ((LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE))
+                .removeUpdates(qiblaManager);
 
+        ((LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE))
+                .removeUpdates(qiblaManager);
+        SensorManager mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        Sensor gsensor = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor msensor = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        mSensorManager.unregisterListener(qiblaManager, gsensor);
+        mSensorManager.unregisterListener(qiblaManager, msensor);
+        cancelSchedule();
+
+    }
     private String getLocationForPrint(double latitude, double longitude) {
         int latDegree = (new Double(Math.floor(latitude))).intValue();
         int longDegree = (new Double(Math.floor(longitude))).intValue();
@@ -393,14 +414,15 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
     }
 
     private void useDefaultLocation(SharedPreferences perfs, String key) {
+
         int defLocationID = Integer.parseInt(perfs.getString(key, ""
-                + LocationEnum.MENU_BIRJAND.getId()));
+                + LocationEnum.MENU_TEHRAN.getId()));
         LocationEnum locationEnum = LocationEnum.values()[defLocationID - 1];
         Location location = locationEnum.getLocation();
         qiblaManager.onLocationChanged(location);
-        this.setLocationText(String.format(
-                getString(R.string.default_location_text),
-                locationEnum.getName(getActivity().getApplicationContext())));
+//        this.setLocationText(String.format(
+//                getString(R.string.default_location_text),
+//                locationEnum.getName(getActivity().getApplicationContext())));
         onGPSOff(location);
     }
     private void onGPSOff(Location defaultLocation) {
@@ -408,9 +430,9 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
         gpsLocationFound = false;
         requestForValidationOfQibla();
     }
-    public void setLocationText(String textToShow) {
-        this.location_line2 = textToShow;
-    }
+//    public void setLocationText(String textToShow) {
+//        this.location_line2 = textToShow;
+//    }
     private void requestForValidationOfQibla() {
         // TextView textView = (TextView)
         // findViewById(R.id.location_text_line1);
@@ -464,7 +486,13 @@ public class QiblaFragment extends Fragment implements Animation.AnimationListen
         schedule();
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        ConcurrencyUtil.setToZero();
+        ConcurrencyUtil.directionChangedLock.readLock();
+        unregisterListeners();
+    }
     public void onAnimationRepeat(Animation animation) {
 
     }

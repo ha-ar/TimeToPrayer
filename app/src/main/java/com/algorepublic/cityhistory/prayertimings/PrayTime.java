@@ -380,7 +380,16 @@ public class PrayTime {
         return getDatePrayerTimes(year, month + 1, day, latitude, longitude,
                 tZone);
     }
+    public ArrayList<String> getPrayerTimes24(Calendar date, double latitude,
+                                            double longitude, double tZone) {
 
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day = date.get(Calendar.DATE);
+
+        return getDatePrayerTimes(year, month + 1, day, latitude, longitude,
+                tZone);
+    }
     // set custom values for calculation parameters
     private void setCustomParams(double[] params) {
 
